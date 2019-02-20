@@ -45,6 +45,7 @@ const app = express();
 var mongoPrefix = "mongodb://"
 var user = process.env.MONGODB_USER
 var password = process.env.MONGODB_PASSWORD
+var database = "rubix"
 
 var cosmosConnectString = mongoPrefix.concat(user,`:`,password,`@`,user,`.documents.azure.com:10255/?ssl=true`)
 
@@ -54,7 +55,9 @@ if (process.env.NODE_ENV != 'local') {
     {
       user: user,
       pass: password,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      dbName: database
+
     }
   );
 } else {
