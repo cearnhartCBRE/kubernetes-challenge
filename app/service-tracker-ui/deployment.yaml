@@ -16,16 +16,14 @@ spec:
         - name: service-tracker-ui
           image: rubixacr.azurecr.io/kubewrkshp/servicetrackerui:v26023
           imagePullPolicy: Always
+          env:
+            - name: FLIGHT_API_ROOT
+              value: http://40.69.164.148:3003/
+            - name: WEATHER_API_ROOT
+              value: http://weather-api.hackfest.svc.cluster.local:3015/
+            - name: QUAKES_API_ROOT
+              value: http://quakes-api.hackfest.svc.cluster.local:3012/
+            - name: APPINSIGHTS_INSTRUMENTATIONKEY
+              value: 6dc23005-a1d0-418a-82bd-b232498b5221
       imagePullSecrets:
         - name: rubixacr
-apiVersion: v1
-kind: Service
-metadata:
-  name: service-tracker-ui
-spec:
-  type: LoadBalancer
-  ports:
-    - port: 8080
-      targetPort: 8080
-  selector:
-    app: service-tracker-ui
