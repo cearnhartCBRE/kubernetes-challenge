@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: data-api
+  template:
+    metadata:
+      labels:
+        app: data-api
+    spec:
+      containers:
+        - name: data-api
+          image: rubixacr.azurecr.io/kubewrkshp/dataapi:v26023
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: rubixacr
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-api
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: data-api
