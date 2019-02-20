@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-updater
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: data-updater
+  template:
+    metadata:
+      labels:
+        app: data-updater
+    spec:
+      containers:
+        - name: data-updater
+          image: rubixacr.azurecr.io/kubewrkshp/dataupdater:v26023
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: rubixacr
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-updater
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: data-updater
