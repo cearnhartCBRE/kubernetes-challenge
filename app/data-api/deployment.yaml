@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: data-api
-          image: rubixacr.azurecr.io/kubewrkshp/dataapi:v26098
+          image: rubixacr.azurecr.io/kubewrkshp/dataapi:v26099
           imagePullPolicy: Always
           env:
             - name: MONGODB_USER

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flights-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flights-api
+  template:
+    metadata:
+      labels:
+        app: flights-api
+    spec:
+      containers:
+        - name: flights-api
+          image: rubixacr.azurecr.io/kubewrkshp/flightsapi:v26099
+          imagePullPolicy: Always
+          env:
+            - name: APPINSIGHTS_INSTRUMENTATIONKEY
+              valueFrom:
+                secretKeyRef:
+                  name: appinsights
+                  key: appinsights    
+            - name: DATA_SERVICE_URI
+              value: http://40.113.205.109:3009/
+            - name: CACHE_SERVICE_URI
+              value: http://cache-api.hackfest.svc.cluster.local:3006/        
+      imagePullSecrets:
+        - name: rubixacr
