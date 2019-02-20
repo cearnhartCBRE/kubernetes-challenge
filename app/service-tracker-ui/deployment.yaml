@@ -22,8 +22,11 @@ spec:
             - name: WEATHER_API_ROOT
               value: http://weather-api.hackfest.svc.cluster.local:3015/
             - name: QUAKES_API_ROOT
-              value: http://quakes-api.hackfest.svc.cluster.local:3012/
+              value: http://52.176.90.85:3012/
             - name: APPINSIGHTS_INSTRUMENTATIONKEY
-              value: 6dc23005-a1d0-418a-82bd-b232498b5221
+              valueFrom:
+                secretKeyRef:
+                  name: appinsights
+                  key: appinsights
       imagePullSecrets:
         - name: rubixacr
