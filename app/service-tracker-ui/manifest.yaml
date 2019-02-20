@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-tracker-ui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: service-tracker-ui
+  template:
+    metadata:
+      labels:
+        app: service-tracker-ui
+    spec:
+      containers:
+        - name: service-tracker-ui
+          image: rubixacr.azurecr.io/kubewrkshp/servicetrackerui:v26023
+          imagePullPolicy: Always
+      imagePullSecrets:
+        - name: rubixacr
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-tracker-ui
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: service-tracker-ui
