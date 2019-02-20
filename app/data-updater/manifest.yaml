@@ -16,6 +16,17 @@ spec:
         - name: data-updater
           image: rubixacr.azurecr.io/kubewrkshp/dataupdater:v26023
           imagePullPolicy: Always
+          env:
+            - name: MONGODB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: cosmos-db-connect
+                  key: user
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: cosmos-db-connect
+                  key: pwd
       imagePullSecrets:
         - name: rubixacr
 apiVersion: v1
