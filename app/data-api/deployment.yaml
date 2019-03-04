@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: data-api
+  name: data-apiv2
+  namespace: elrond
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: data-api
+      app: data-apiv2
   template:
     metadata:
       labels:
-        app: data-api
+        app: data-apiv2
     spec:
       containers:
-        - name: data-api
+        - name: data-apiv2
           image: rubixacr.azurecr.io/kubewrkshp/dataapi:v26099
           imagePullPolicy: Always
           env:
@@ -33,4 +34,4 @@ spec:
                   name: appinsights
                   key: appinsights                   
       imagePullSecrets:
-        - name: rubixacr
+        - name: default.rubixacr

@@ -2,8 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: quakes-api
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind:  Mapping
+      name:  quakes-api
+      prefix: /quakes-api/
+      service: quakes-api:3012
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 3012
       targetPort: 3012

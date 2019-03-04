@@ -18,11 +18,11 @@ spec:
           imagePullPolicy: Always
           env:
             - name: FLIGHT_API_ROOT
-              value: http://40.69.164.148:3003/
+              value: http://52.165.174.255/flights-api/
             - name: WEATHER_API_ROOT
-              value: http://weather-api.hackfest.svc.cluster.local:3015/
+              value: http://52.165.174.255/weather-api/
             - name: QUAKES_API_ROOT
-              value: http://52.176.90.85:3012/
+              value: http://52.165.174.255/quakes-api/
             - name: APPINSIGHTS_INSTRUMENTATIONKEY
               valueFrom:
                 secretKeyRef:
