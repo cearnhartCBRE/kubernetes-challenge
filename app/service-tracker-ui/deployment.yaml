@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: service-tracker-ui
-          image: rubixacr.azurecr.io/kubewrkshp/servicetrackerui:v26023
+          image: cbtacr.azurecr.io/kubewrkshp/servicetrackerui:v26023
           imagePullPolicy: Always
           env:
             - name: FLIGHT_API_ROOT
@@ -29,4 +29,5 @@ spec:
                   name: appinsights
                   key: appinsights
       imagePullSecrets:
-        - name: rubixacr
+        - name: myregistrykey
+

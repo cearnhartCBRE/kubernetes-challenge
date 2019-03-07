@@ -1,11 +1,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: data-api
+  name: data-apiv2
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind:  AuthService
+      name:  authentication
+      auth_service: "internal-vas-plat-apis.cbre.com:443/vas/platform/auth/validate/token?audience=93cb98f3-c8eb-407c-b751-7add1a15f84b"
+      proto: https
+      allowed_request_headers:
+      - "Authorization"
+      allowed_authorization_headers:
+      - "Authorization"
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
     - port: 3009
       targetPort: 3009
   selector:
-    app: data-api
+    app: data-apiv2

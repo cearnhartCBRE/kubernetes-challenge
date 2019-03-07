@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: host-auth-service
+  annotations:
+    getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind:  AuthService
+      name:  authentication
+      auth_service: "http://137.135.119.217:8080/validate"
+      proto: http
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: host-auth-service

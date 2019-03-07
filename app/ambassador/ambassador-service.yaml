@@ -1,0 +1,39 @@
+---
+ apiVersion: v1
+ kind: Service
+ metadata:
+   labels:
+     service: ambassador
+   name: ambassador
+   annotations:
+     getambassador.io/config: |
+      ---
+      apiVersion: ambassador/v1
+      kind: AuthService
+      name: authentication
+      auth_service: "http://40.114.76.18:8080/validate"
+      allowed_request_headers:
+      - "token"
+      allowed_authorization_headers:
+      - "token"
+      allow_request_body: false
+      ---
+      apiVersion: ambassador/v0
+      kind:  Mapping
+      name:  httpbin_mapping
+      prefix: /httpbin/
+      service: httpbin.org:80
+      host_rewrite: httpbin.org
+ spec:
+   loadBalancerSourceRanges:
+   - 0.0.0.0/0
+   type: LoadBalancer
+   ports:
+   - name: ambassador-http
+     port: 80
+     targetPort: 80
+   - name: ambassador-https
+     port: 443
+     targetPort: 80
+   selector:
+     service: ambassador

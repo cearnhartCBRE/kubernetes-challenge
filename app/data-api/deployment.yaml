@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: data-apiv2
-  namespace: elrond
 spec:
   replicas: 3
   selector:
